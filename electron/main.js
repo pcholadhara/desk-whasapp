@@ -1,6 +1,9 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
-const path = require('path')
-const client = require('./whatsapp');
+import { app, BrowserWindow, ipcMain } from 'electron'
+import path from 'path';
+import { fileURLToPath } from 'url';
+import client from './whatsapp.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const isDev = process.env.NODE_ENV !== 'production' && !app.isPackaged;
 
