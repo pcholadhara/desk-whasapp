@@ -40,7 +40,7 @@ const WA_Home = () => {
     };
 
     return (
-        <div className="h-screen w-screen bg-slate-50 flex flex-col items-center justify-center text-slate-900 overflow-hidden">
+        <>
             {!ready && qrCode && (
                 <QRCodeDisplay qrCode={qrCode} />
             )}
@@ -56,7 +56,7 @@ const WA_Home = () => {
                     incomingMessages={incomingMessages}
                 />
             )}
-        </div>
+        </>
     );
 };
 

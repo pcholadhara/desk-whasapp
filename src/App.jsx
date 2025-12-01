@@ -1,9 +1,8 @@
-import React from 'react';
-import WA_Home from './wa/WA_Home';
+import { Mains } from './global/uis/mains';
 
 function App() {
     return (
-        <WA_Home />
+        <Mains />
     );
 }
 

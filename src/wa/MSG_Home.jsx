@@ -3,7 +3,24 @@ import SendMessageForm from './SendMessageForm';
 import PhoneNumbersUpload from './PhoneNumbersUpload';
 import IncomingMessages from './IncomingMessages';
 
-const MSG_Home = ({ phoneNumber, setPhoneNumber, message, setMessage, handleSend, status, incomingMessages }) => {
+const MSG_Home = ({phoneNumber, setPhoneNumber, message, setMessage, handleSend, status, incomingMessages})=>{
+    return(<>
+        <div className="w-full h-full flex flex-col overflow-hidden mx-auto">
+            <SendMessageForm
+                phoneNumber={phoneNumber}
+                setPhoneNumber={setPhoneNumber}
+                message={message}
+                setMessage={setMessage}
+                handleSend={handleSend}
+                status={status}
+            />
+        </div>
+    </>)
+}
+
+
+
+const MSG_Homex = ({ phoneNumber, setPhoneNumber, message, setMessage, handleSend, status, incomingMessages }) => {
     return (
         <div className="w-full h-full flex flex-row gap-4 p-4 overflow-hidden">
             {/* Column 1: Send Message Form */}
@@ -19,14 +36,14 @@ const MSG_Home = ({ phoneNumber, setPhoneNumber, message, setMessage, handleSend
             </div>
 
             {/* Column 2: Upload Phone Numbers & Incoming Messages */}
-            <div className="w-1/3 h-full flex flex-col gap-4 overflow-hidden">
+            {/* <div className="w-1/3 h-full flex flex-col gap-4 overflow-hidden">
                 <div className="h-1/2 overflow-hidden">
                     <PhoneNumbersUpload />
                 </div>
                 <div className="h-1/2 overflow-hidden">
                     <IncomingMessages messages={incomingMessages} />
                 </div>
-            </div>
+            </div> */}
 
             {/* Column 3: Custom Instructions and Settings */}
             <div className="w-1/3 h-full bg-white border border-slate-200 p-6 overflow-y-auto custom-scrollbar shadow-sm flex flex-col">

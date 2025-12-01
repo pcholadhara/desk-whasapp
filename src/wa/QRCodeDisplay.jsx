@@ -3,10 +3,10 @@ import { QRCodeCanvas } from 'qrcode.react';
 
 const QRCodeDisplay = ({ qrCode }) => {
     return (
-        <div className="bg-white p-8 shadow-xl border border-slate-200 max-w-sm w-full mx-4">
+        <div className="bg-white p-8 shadow-xl border border-slate-200 max-w-sm w-full h-full mx-auto">
             <div className="text-center space-y-6">
                 <div className="space-y-2">
-                    <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Link Device</h2>
+                    <h2 className="text-xl font-bold text-slate-900 tracking-tight">Link Device</h2>
                     <p className="text-slate-500 text-sm">Open WhatsApp on your phone and scan the QR code to connect</p>
                 </div>
 
