@@ -14,7 +14,6 @@ export const Mains = ()=>{
 const Contents = ()=>{
     return(<>
         <div className="flex w-full h-full bg-green-400">
-        
             <Routes>
                 <Route exact path="/" element={<WA_Home/>}/>
             </Routes>

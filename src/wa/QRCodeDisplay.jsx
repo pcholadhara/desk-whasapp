@@ -1,9 +1,8 @@
-import React from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 
 const QRCodeDisplay = ({ qrCode }) => {
     return (
-        <div className="bg-white p-8 shadow-xl border border-slate-200 max-w-sm w-full h-full mx-auto">
+        <div className="bg-white p-8 w-full h-full flex justify-center items-center">
             <div className="text-center space-y-6">
                 <div className="space-y-2">
                     <h2 className="text-xl font-bold text-slate-900 tracking-tight">Link Device</h2>
@@ -11,7 +10,7 @@ const QRCodeDisplay = ({ qrCode }) => {
                 </div>
 
                 <div className="bg-white p-4 inline-block shadow-inner">
-                    <QRCodeCanvas value={qrCode} size={240} />
+                    <QRCodeCanvas value={qrCode} size={200} />
                 </div>
 
                 <div className="flex items-center justify-center space-x-2 text-slate-500 text-xs">

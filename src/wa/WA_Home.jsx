@@ -3,41 +3,59 @@ import QRCodeDisplay from './QRCodeDisplay';
 import MSG_Home from './MSG_Home';
 
 const WA_Home = () => {
-    const [qrCode, setQrCode] = useState('');
-    const [ready, setReady] = useState(false);
-    const [status, setStatus] = useState('');
+    const [initing, setIniting]         = useState(true);
+    const [qrCode, setQrCode]           = useState('');
+    const [ready, setReady]             = useState(false);
+    const [status, setStatus]           = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [message, setMessage] = useState('');
+    const [message, setMessage]         = useState('');
     const [incomingMessages, setIncomingMessages] = useState([]);
 
     useEffect(() => {
-        // Listen for QR code
-        if (window.electron) {
-            window.electron.on('qr', (qr) => {
+        if (window.api) {
+            window.api.whatsApp();
+
+            window.api.on('whatsapp:qr', (qr) => {
                 setQrCode(qr);
                 setReady(false);
+                setStatus('Scan the QR code with your WhatsApp app.');
+                setIniting(false);
             });
 
-            window.electron.on('ready', () => {
+            window.api.on('whatsapp:ready', () => {
                 setReady(true);
                 setQrCode('');
+                setStatus('WhatsApp client is ready!');
             });
 
-            window.electron.on('send-message-status', (statusMsg) => {
+            window.api.on('whatsapp:auth_failure', (msg) => {
+                setReady(false);
+                setQrCode('');
+                setStatus(`Authentication failed: ${msg}`);
+                console.error('WhatsApp Authentication Failure:', msg);
+            });
+
+            window.api.on('send-message-status', (statusMsg) => {
                 setStatus(statusMsg);
             });
 
-            window.electron.on('incoming-message', (msg) => {
+            window.api.on('incoming-message', (msg) => {
                 setIncomingMessages(prev => [msg, ...prev]);
             });
         }
     }, []);
 
     const handleSend = () => {
-        if (window.electron) {
-            window.electron.send('send-message', { number: phoneNumber, message });
+        if (window.api) {
+            window.api.send('send-message', { number: phoneNumber, message });
         }
     };
+
+    if(initing){
+        return(<>
+            <p className="text-xl">please wait..</p>
+        </>)
+    }
 
     return (
         <>
