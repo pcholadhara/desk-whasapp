@@ -1,17 +1,21 @@
 import Database from 'better-sqlite3';
+const db = new Database("wapp.db", {verbose: console.log});
 
 export const dbRequest = (ipcMain) => {
     ipcMain.handle("db-request", (event, data)=>{
-        console.log(data);
+        console.log({data});
+        console.log("Working DB Request");
+        
         try {
             switch (data.type) {
                 case "db" :
-                    let db = new Database(data.name, {verbose: console.log});
+                    db = new Database(data.name, {verbose: console.log});
                     return {success: 1};
 
                 case "run":
                     const stmt = db.prepare(data.query);
                     const info = stmt.run(...(data.params || []));
+                    console.log({info});
                     return {success: info.changes, rowId: info.lastInsertRowid};
 
                 case "all":

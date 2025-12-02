@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import QRCodeDisplay from './QRCodeDisplay';
 import MSG_Home from './MSG_Home';
+import { saveChat } from '../db2/chat/db.chat.save';
 
 const WA_Home = () => {
     const [initing, setIniting]         = useState(true);
@@ -47,9 +48,14 @@ const WA_Home = () => {
         }
     }, [status]);
 
-    const handleSend = () => {
+    const handleSend = async () => {
         if (window.api) {
             window.api.send('send-message', { number: phoneNumber, message });
+            const chat = {
+                msgTo: phoneNumber,
+                msgBody: message
+            }
+            await saveChat(chat);
         }
     };
 

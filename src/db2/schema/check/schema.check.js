@@ -1,19 +1,19 @@
 import {checkTables} from "./schema.check.tbls";
 
 const dbVersion = () => {
-       const dbversion = 20250101;
-       const localVersion = localStorage.getItem("bellyfill.dbversion");
+       const dbversion = 20250102;
+       const localVersion = localStorage.getItem("whatsapp.dbversion");
        if(localVersion) {
               const version = parseInt(localVersion);
               if(dbversion > version) {
-                     localStorage.setItem("bellyfill.dbversion", dbversion);
+                     localStorage.setItem("whatsapp.dbversion", dbversion);
                      return true;
               }else{
                      return false;
               }
        }
 
-       localStorage.setItem("bellyfill.dbversion", dbversion);
+       localStorage.setItem("whatsapp.dbversion", dbversion);
        return true;
 }
 
@@ -24,7 +24,7 @@ export const setDatabase = async () => {
 export const checkSchema = async () =>{
        const version = dbVersion();
        if(!version) {
-              return;
+              // return;
        }
        //await dropAllViews(dbViews);
        await checkTables();

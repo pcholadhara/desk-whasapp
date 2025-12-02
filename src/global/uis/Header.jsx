@@ -20,8 +20,8 @@ const Header = () => {
     }, [menuRef]);
 
     return (<>
-        <div  className="flex w-full flex-row items-center justify-between px-4 h-12 border-b border-gray-200 bg-[#006565] text-white">
-            <div style={{"-webkit-app-region": "drag"}} className="text-lg font-semibold">
+        <div className="flex w-full flex-row items-center justify-between px-4 h-12 border-b border-gray-200 bg-[#006565] text-white">
+            <div className="text-lg font-semibold grow" style={{"WebkitAppRegion": "drag"}}>
                 logo
             </div>
 
@@ -33,6 +33,9 @@ const Header = () => {
                     <ul className="flex flex-col">
                         <li  className="px-2 py-2">
                             <Link to="" className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Profile</Link>
+                        </li>
+                        <li className="px-2 py-2">
+                            <Link to="/chat" className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Chats</Link>
                         </li>
                         <li className="px-2 py-2">
                             <Link to="" className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Settings</Link>
