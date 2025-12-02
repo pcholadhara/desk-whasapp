@@ -26,12 +26,14 @@ const WA_Home = () => {
                 setReady(true);
                 setQrCode('');
                 setStatus('WhatsApp client is ready!');
+                setIniting(false);
             });
 
             window.api.on('whatsapp:auth_failure', (msg) => {
                 setReady(false);
                 setQrCode('');
                 setStatus(`Authentication failed: ${msg}`);
+                setIniting(false);
                 console.error('WhatsApp Authentication Failure:', msg);
             });
 
@@ -43,7 +45,7 @@ const WA_Home = () => {
                 setIncomingMessages(prev => [msg, ...prev]);
             });
         }
-    }, []);
+    }, [status]);
 
     const handleSend = () => {
         if (window.api) {

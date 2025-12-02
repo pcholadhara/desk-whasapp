@@ -20,8 +20,8 @@ const Header = () => {
     }, [menuRef]);
 
     return (<>
-        <div className="flex w-full flex-row items-center justify-between px-4 h-12 border-b border-gray-200 bg-[#006565] text-white">
-            <div className="text-lg font-semibold">
+        <div  className="flex w-full flex-row items-center justify-between px-4 h-12 border-b border-gray-200 bg-[#006565] text-white">
+            <div style={{"-webkit-app-region": "drag"}} className="text-lg font-semibold">
                 logo
             </div>
 

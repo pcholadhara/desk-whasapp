@@ -1,5 +1,4 @@
 import Database from 'better-sqlite3';
-let db = new Database('./bellyfill.db', { verbose: console.log });
 
 export const dbRequest = (ipcMain) => {
     ipcMain.handle("db-request", (event, data)=>{
@@ -7,7 +6,7 @@ export const dbRequest = (ipcMain) => {
         try {
             switch (data.type) {
                 case "db" :
-                    db = new Database(data.name, {verbose: console.log});
+                    let db = new Database(data.name, {verbose: console.log});
                     return {success: 1};
 
                 case "run":
