@@ -18,8 +18,12 @@ export const whatsApp = (ipcMain) => {
         });
 
         wclient.on('ready', () => {
+            
+            const info = wclient.info;
+          
+            console.log('Client Info:', info);
             if (browserWindow) {
-                browserWindow.webContents.send('whatsapp:ready');
+                browserWindow.webContents.send('whatsapp:ready', info);
             }
         });
 
@@ -67,6 +71,30 @@ export const whatsApp = (ipcMain) => {
             if (browserWindow) {
                 browserWindow.webContents.send('send-message-status', `Failed to send message: ${error.message}`);
             }
+        }
+    });
+
+    wclient.on('message', msg => {
+        try {
+            const payload = {
+                sender: msg.from,
+                text: msg.body,
+                time: msg.timestamp,
+                pushname: msg._data?.notifyName || msg._data?.pushname || '',
+            };
+
+            // Send to renderer window
+            browserWindow.webContents.send('incoming-message', payload);
+        } catch (err) {
+            console.error('IPC incoming-message error:', err);
+        }
+
+        if (browserWindow) {
+            browserWindow.webContents.send('incoming-message', {
+                from: msg.from,
+                body: msg.body,
+                timestamp: msg.timestamp
+            });
         }
     });
 };

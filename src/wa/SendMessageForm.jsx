@@ -1,4 +1,12 @@
-const SendMessageForm = ({ phoneNumber, setPhoneNumber, message, setMessage, handleSend, status }) => {
+import WASender from "../xtra/whatsapp.send";
+
+const SendMessageForm = ({ phoneNumber, setPhoneNumber, message, setMessage, status }) => {
+    
+    const send = ()=>{
+        const wa = new WASender().setReceipient("91"+phoneNumber, "").setBody(message, "TEXT");
+        wa.send();
+    }
+
     return (
         <div className=" bg-white p-4 h-full w-full flex flex-col">
             <div className="space-y-2 grow flex flex-col">
@@ -26,7 +34,7 @@ const SendMessageForm = ({ phoneNumber, setPhoneNumber, message, setMessage, han
                     </div>
 
                     <button
-                        onClick={handleSend}
+                        onClick={send}
                         className="w-full py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-lg shadow-emerald-600/20 transition-all duration-200 transform active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-white">
                         Send Message
                     </button>
