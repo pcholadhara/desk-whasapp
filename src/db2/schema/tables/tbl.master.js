@@ -18,3 +18,10 @@ export const tblNumbers = {
     dateTime    : "INTEGER"
 }
 
+export const msgTmpls = {
+    id          : "INTEGER PRIMARY KEY AUTOINCREMENT",
+    tmplName    : "TEXT",
+    tmplBody    : "TEXT",
+    dateTime    : "INTEGER"
+}
+

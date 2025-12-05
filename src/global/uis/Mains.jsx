@@ -9,6 +9,7 @@ import SignIn from "./SignIn"
 import MSG_Home from "../../wa/MSG_Home"
 import { getSoftUser, localKeys, setLocal } from "../../xtra/localstore"
 import { saveChat } from "../../db2/chat/db.chat.save"
+import TmplsHome from "../../tmpls/TmplsHome"
 
 export const Mains = () => {
     const [initing, setIniting] = useState(true);
@@ -93,6 +94,7 @@ const Contents = () => {
                 <Route exact path="/" element={<ChatHome />} />
                 <Route exact path="/Chat" element={<MSG_Home />} />
                 <Route exact path="/chat/:phnNo" element={<ChatWindow />} />
+                <Route exact path="/templates" element={<TmplsHome />} />
             </Routes>
         </div>
     </>)

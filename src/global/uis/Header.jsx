@@ -33,6 +33,7 @@ const Header = () => {
                     <ul className="flex flex-col">
                         <List to="" setOpen={setOpen} placeHolder="Home" />
                         <List to="/chat" setOpen={setOpen} placeHolder="Chat" />
+                        <List to="/templates" setOpen={setOpen} placeHolder="Templates" />
                         <List to="" setOpen={setOpen} placeHolder="Settings" />
                         <List to="" setOpen={setOpen} placeHolder="Logout" />
                     </ul>
