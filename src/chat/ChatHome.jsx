@@ -10,31 +10,8 @@ const ChatHome = () => {
     const [selectedChat, setSelectedChat] = useState(null);
 
     const loadData = async () => {
-        const messages = await getAllChats();console.log("Loaded chats:", messages);
-        // const groupedChats = messages.reduce((acc, message) => {
-        //     const { from, body, timestamp } = message;
-        //     if (!acc[from]) {
-        //         acc[from] = {
-        //             name: from,
-        //             messages: []
-        //         };
-        //     }
-        //     acc[from].messages.push({ body, timestamp });
-        //     return acc;
-        // }, {});
-
-        // const chatList = Object.values(groupedChats).map(chat => {
-        //     const lastMessage = chat.messages[chat.messages.length - 1];
-        //     return {
-        //         ...chat,
-        //         lastMessage: lastMessage ? lastMessage.body : "No messages",
-        //     };
-        // });
-
+        const messages = await getAllChats();   console.log("Loaded chats:", messages);
         setChats(messages);
-        // if (chatList.length > 0) {
-        //     setSelectedChat(chatList[0]);
-        // }
     }
 
     useEffect(() => {
@@ -52,7 +29,7 @@ const ChatHome = () => {
                 <div className="p-4 bg-gray-200 border-b border-gray-300">
                     <h1 className="text-xl font-bold">Chats</h1>
                 </div>
-                <div className="overflow-y-auto flex-1">
+                <div className="overflow-y-auto overflow-x-hidden flex-1">
                     {chats.map(chat => (
                         <div
                             key={chat.waNumber}

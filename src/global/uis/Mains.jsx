@@ -7,8 +7,10 @@ import ChatWindow from "../../chat/ChatWindow"
 import { useEffect, useState } from "react"
 import SignIn from "./SignIn"
 import MSG_Home from "../../wa/MSG_Home"
+import { getSoftUser, localKeys, setLocal } from "../../xtra/localstore"
+import { saveChat } from "../../db2/chat/db.chat.save"
 
-export const Mains = ()=>{
+export const Mains = () => {
     const [initing, setIniting] = useState(true);
     const [qrCode, setQrCode] = useState('');
     const [ready, setReady] = useState(false);
@@ -18,19 +20,26 @@ export const Mains = ()=>{
         if (window.api) {
             window.api.whatsApp();
         }
+
         window.api.on('whatsapp:qr', (qr) => {
             setQrCode(qr);
             setReady(false);
             setStatus('Scan the QR code with your WhatsApp app.');
             setIniting(false);
         });
+
         window.api.on('whatsapp:ready', (info) => {
             setReady(true);
             setQrCode('');
             setStatus('WhatsApp client is ready!');
             setIniting(false);
-            setLocal(localKeys.SOFT_USER, { name: info.pushname, number: info.wid.user });
+            try {
+                setLocal(localKeys.SOFT_USER, { name: info.pushname, number: info.wid.user });
+            } catch (error) {
+                console.log(error);
+            }
         });
+
         window.api.on('whatsapp:auth_failure', (msg) => {
             setReady(false);
             setQrCode('');
@@ -38,10 +47,18 @@ export const Mains = ()=>{
             setIniting(false);
             console.error('WhatsApp Authentication Failure:', msg);
         });
+
         window.api.on('send-message-status', (statusMsg) => {
             setStatus(statusMsg);
         });
+
         window.api.on('incoming-message', async (msg) => {
+            console.log(msg);
+            if (!msg || !msg.from) {
+                console.warn("Message missing 'from':", msg);
+                return;
+            }
+
             const user = getSoftUser();
             const chat = {
                 msgFrom: msg.from.split('@')[0],
@@ -52,13 +69,15 @@ export const Mains = ()=>{
         });
     }, [status]);
 
+    
+    
     return (<>
-        {(!ready && qrCode) ? <SignIn initing={initing} qrCode={qrCode} status={status}/> : <MainArea/>}
+        {(!ready && qrCode) ? <SignIn initing={initing} qrCode={qrCode} status={status} /> : <MainArea />}
     </>)
 }
 
-const MainArea = ()=>{
-    return(<>
+const MainArea = () => {
+    return (<>
         <div className="flex w-screen h-screen flex-col">
             <Header />
             <Contents />
@@ -67,12 +86,12 @@ const MainArea = ()=>{
     </>)
 }
 
-const Contents = ()=>{
-    return(<>
+const Contents = () => {
+    return (<>
         <div className="flex w-full h-full overflow-hidden">
             <Routes>
-                <Route exact path="/" element={<ChatHome/>}/>
-                <Route exact path="/Chat" element={<MSG_Home/>}/>
+                <Route exact path="/" element={<ChatHome />} />
+                <Route exact path="/Chat" element={<MSG_Home />} />
                 <Route exact path="/chat/:phnNo" element={<ChatWindow />} />
             </Routes>
         </div>

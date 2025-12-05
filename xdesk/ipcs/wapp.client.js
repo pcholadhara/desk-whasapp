@@ -77,25 +77,27 @@ export const whatsApp = (ipcMain) => {
     wclient.on('message', msg => {
         try {
             const payload = {
-                sender: msg.from,
-                text: msg.body,
+                from: msg.from,
+                name: msg._data?.notifyName || msg._data?.pushname || '',
+                body: msg.body,
                 time: msg.timestamp,
-                pushname: msg._data?.notifyName || msg._data?.pushname || '',
             };
+            if(browserWindow) {
+                // Send to renderer window
+                browserWindow.webContents.send('incoming-message', payload);
+            }
 
-            // Send to renderer window
-            browserWindow.webContents.send('incoming-message', payload);
         } catch (err) {
             console.error('IPC incoming-message error:', err);
         }
 
-        if (browserWindow) {
-            browserWindow.webContents.send('incoming-message', {
-                from: msg.from,
-                body: msg.body,
-                timestamp: msg.timestamp
-            });
-        }
+        // if (browserWindow) {
+        //     browserWindow.webContents.send('incoming-message', {
+        //         from: msg.from,
+        //         body: msg.body,
+        //         timestamp: msg.timestamp
+        //     });
+        // }
     });
 };
 
