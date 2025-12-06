@@ -10,6 +10,7 @@ import MSG_Home from "../../wa/MSG_Home"
 import { getSoftUser, localKeys, setLocal } from "../../xtra/localstore"
 import { saveChat } from "../../db2/chat/db.chat.save"
 import TmplsHome from "../../tmpls/TmplsHome"
+import TmplsList from "../../tmpls/TmplsList"
 
 export const Mains = () => {
     const [initing, setIniting] = useState(true);
@@ -79,7 +80,7 @@ export const Mains = () => {
 
 const MainArea = () => {
     return (<>
-        <div className="flex w-screen h-screen flex-col">
+        <div className="flex w-screen h-screen flex-col overflow-hidden">
             <Header />
             <Contents />
             <Footer />
@@ -89,12 +90,13 @@ const MainArea = () => {
 
 const Contents = () => {
     return (<>
-        <div className="flex w-full h-full overflow-hidden">
+        <div className="flex w-full flex-1 min-h-0 overflow-hidden">
             <Routes>
                 <Route exact path="/" element={<ChatHome />} />
                 <Route exact path="/Chat" element={<MSG_Home />} />
                 <Route exact path="/chat/:phnNo" element={<ChatWindow />} />
-                <Route exact path="/templates" element={<TmplsHome />} />
+                <Route exact path="/tmpls/:id/save" element={<TmplsHome />} />
+                <Route exact path="/templates/list" element={<TmplsList />} />
             </Routes>
         </div>
     </>)

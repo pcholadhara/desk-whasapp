@@ -21,3 +21,4 @@ export const getNumberDetails = async (phnNo)=>{
                                     .getRow();
     return row;
 }
+

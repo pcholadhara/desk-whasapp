@@ -16,3 +16,9 @@ export const updateRow = async (tblName, data, filter) =>{
     const resp      = await window.api.dbRequest({type: "run", query: buildr.query, params: buildr.params});
     return resp;
 }
+
+export const deleteRow = async(tblName, filter) =>{
+    const buildr    = new QueryBuilder(tblName).getDQuery(filter);
+    const resp      = await window.api.dbRequest({type: "run", query: buildr.query, params: buildr.params});
+    return resp;
+}

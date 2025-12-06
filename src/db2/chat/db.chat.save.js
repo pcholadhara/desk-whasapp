@@ -25,3 +25,4 @@ const updateNumbers = async (number, msgBody) => {
         await insertRow(dbTables.WA_NUMBERS, data);
     }
 }
+

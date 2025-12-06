@@ -34,6 +34,20 @@ class QueryBuilder {
 
           return { query, params };
       }
+
+    getDQuery(filter) {
+        if (!filter || typeof filter !== 'object' || Object.keys(filter).length === 0) {
+            throw new Error('Invalid filter for Delete query');
+        }
+        const whereClause = Object.keys(filter).map(col => `${col} = ?`).join(' AND ');
+        const query = `DELETE FROM ${this.tableName} WHERE ${whereClause}`;
+
+        const params = [
+            ...Object.values(filter)
+        ];
+
+        return{query, params};
+    }
 }
 
 export default QueryBuilder;
