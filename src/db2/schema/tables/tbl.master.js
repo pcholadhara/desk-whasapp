@@ -1,3 +1,4 @@
+import { MessageSquareDotIcon } from "lucide-react"
 
 export const tblChatting = {
     id          : "INTEGER PRIMARY KEY AUTOINCREMENT",
@@ -23,5 +24,12 @@ export const msgTmpls = {
     tmplName    : "TEXT",
     tmplBody    : "TEXT",
     dateTime    : "INTEGER"
+}
+
+export const tblCampaign = {
+    id          : "INTEGER PRIMARY KEY AUTOINCREMENT",
+    phnNo       : "TEXT",
+    sentOn      : "INTEGER",
+    tmplsId     : "INTEGER"
 }
 

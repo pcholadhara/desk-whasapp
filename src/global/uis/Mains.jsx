@@ -11,6 +11,7 @@ import { getSoftUser, localKeys, setLocal } from "../../xtra/localstore"
 import { saveChat } from "../../db2/chat/db.chat.save"
 import TmplsHome from "../../tmpls/TmplsHome"
 import TmplsList from "../../tmpls/TmplsList"
+import TmplsSend from "../../tmpls/TmplsSend"
 
 export const Mains = () => {
     const [initing, setIniting] = useState(true);
@@ -74,7 +75,8 @@ export const Mains = () => {
     
     
     return (<>
-        {(!ready && qrCode) ? <SignIn initing={initing} qrCode={qrCode} status={status} /> : <MainArea />}
+        <MainArea/>
+        {/* {(!ready && qrCode) ? <SignIn initing={initing} qrCode={qrCode} status={status} /> : <MainArea />} */}
     </>)
 }
 
@@ -97,6 +99,7 @@ const Contents = () => {
                 <Route exact path="/chat/:phnNo" element={<ChatWindow />} />
                 <Route exact path="/tmpls/:id/save" element={<TmplsHome />} />
                 <Route exact path="/templates/list" element={<TmplsList />} />
+                <Route exact path="/tmpls/:id/send" element={<TmplsSend />} />
             </Routes>
         </div>
     </>)
