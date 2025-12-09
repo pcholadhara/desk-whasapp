@@ -29,11 +29,12 @@ const Header = () => {
                 <Menu size={18} />
             </button>
             {open && (
-                <div ref={menuRef} className="absolute top-10 right-4 w-30 bg-white border border-gray-200 rounded-md shadow-lg z-50 text-black">
-                    <ul className="flex flex-col">
+                <div ref={menuRef} className="absolute top-10 right-4 w-[200px] bg-white border border-gray-200 rounded-md shadow-lg z-50 text-black">
+                    <ul className="flex flex-col w-full">
                         <List to="" setOpen={setOpen} placeHolder="Home" />
                         <List to="/chat" setOpen={setOpen} placeHolder="Chat" />
                         <List to="/templates/list" setOpen={setOpen} placeHolder="Templates" />
+                        <List to="/bulk/send" setOpen={setOpen} placeHolder="Bulk Message" />
                         <List to="" setOpen={setOpen} placeHolder="Settings" />
                         <List to="" setOpen={setOpen} placeHolder="Logout" />
                     </ul>
@@ -46,8 +47,8 @@ const Header = () => {
 
 const List = ({ to, setOpen, placeHolder }) => {
     return(<>
-        <li className="px-2 py-2">
-            <Link to={to} className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={e=>setOpen(false)}>{placeHolder}</Link>
+        <li className="px-2 flex">
+            <Link to={to} className="px-4 py-2 w-full hover:bg-gray-100 cursor-pointer" onClick={e=>setOpen(false)}>{placeHolder}</Link>
         </li>
     </>)
 }

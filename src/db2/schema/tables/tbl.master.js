@@ -22,6 +22,7 @@ export const tblNumbers = {
 export const msgTmpls = {
     id          : "INTEGER PRIMARY KEY AUTOINCREMENT",
     tmplName    : "TEXT",
+    tmplCategory: "TEXT",
     tmplBody    : "TEXT",
     dateTime    : "INTEGER"
 }

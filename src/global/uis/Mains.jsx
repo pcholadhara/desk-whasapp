@@ -9,9 +9,10 @@ import SignIn from "./SignIn"
 import MSG_Home from "../../wa/MSG_Home"
 import { getSoftUser, localKeys, setLocal } from "../../xtra/localstore"
 import { saveChat } from "../../db2/chat/db.chat.save"
-import TmplsHome from "../../tmpls/TmplsHome"
 import TmplsList from "../../tmpls/TmplsList"
 import TmplsSend from "../../tmpls/TmplsSend"
+import TmplMaster from "../../tmpls/TmplMaster"
+import Send_Bulk from "../../send/Send_Bulk"
 
 export const Mains = () => {
     const [initing, setIniting] = useState(true);
@@ -97,9 +98,10 @@ const Contents = () => {
                 <Route exact path="/" element={<ChatHome />} />
                 <Route exact path="/Chat" element={<MSG_Home />} />
                 <Route exact path="/chat/:phnNo" element={<ChatWindow />} />
-                <Route exact path="/tmpls/:id/save" element={<TmplsHome />} />
+                <Route exact path="/tmpls/:id/save" element={<TmplMaster />} />
                 <Route exact path="/templates/list" element={<TmplsList />} />
                 <Route exact path="/tmpls/:id/send" element={<TmplsSend />} />
+                <Route exact path="/bulk/send" element={<Send_Bulk />} />
             </Routes>
         </div>
     </>)
