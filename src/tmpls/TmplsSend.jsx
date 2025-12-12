@@ -4,11 +4,12 @@ import { getStrDate } from "../xtra/dates";
 import { getTmplsById } from "../db2/templates/db.templates.load";
 import * as XLSX from "xlsx";
 import { saveToCampaign } from "../db2/campaign/db2.campaign.save";
+import { sendTemplatesDirectly } from "./utils.tmpls.send";
 
 const TmplsSend = () => {
     const {id} = useParams();
     const [tmpl, setTmpl] = useState({});
-    const [interval, setInterval] = useState(3);
+    const [interval, setInterval] = useState(2);
     const [numbers, setNumbers] = useState([]);
     const tmpId = parseInt(id);
     const nav = useNavigate();
@@ -38,28 +39,29 @@ const TmplsSend = () => {
         reader.readAsArrayBuffer(file);
     }
 
-    function intervalFunc(int){
-        let time = Date.now();
-        return ()=>{
-            const current = time;
-            time += (int * 60 * 1000);
-            return current;
-        }
-    }
+    // function intervalFunc(int){
+    //     let time = Date.now() + 10000;
+    //     return ()=>{
+    //         const current = time;
+    //         time += (int * 60 * 1000);
+    //         return current;
+    //     }
+    // }
 
     const handleSend = async () => {
-        const time = intervalFunc(interval);
+        const time = generateRandomInterval(interval); console.log("randomTime", time);
+        const msg = getRandomMsg(ids)
 
         for (let i = 0; i < numbers.length; i++) {
             const camp = {
-                phnNo   : toString(numbers[i]),
-                sentOn  : time(),
+                phnNo   : numbers[i].toString(),
+                sentOn  : time,
                 tmplsId : tmpl.id,
             };
-
             const res = await saveToCampaign(camp);
             console.log("campaign saved", res);
         }
+        await sendTemplatesDirectly(numbers, tmpl, interval)
         nav(-1);
     }
 
