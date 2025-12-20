@@ -4,7 +4,7 @@ import { getStrDate } from "../xtra/dates";
 import { getTmplsById } from "../db2/templates/db.templates.load";
 import * as XLSX from "xlsx";
 import { saveToCampaign } from "../db2/campaign/db2.campaign.save";
-import { sendTemplatesDirectly } from "./utils.tmpls.send";
+import { generateRandomInterval, sendTemplatesDirectly } from "./utils.tmpls.send";
 
 const TmplsSend = () => {
     const {id} = useParams();
@@ -50,7 +50,7 @@ const TmplsSend = () => {
 
     const handleSend = async () => {
         const time = generateRandomInterval(interval); console.log("randomTime", time);
-        const msg = getRandomMsg(ids)
+        //const msg = getRandomTmpl(ids)
 
         for (let i = 0; i < numbers.length; i++) {
             const camp = {

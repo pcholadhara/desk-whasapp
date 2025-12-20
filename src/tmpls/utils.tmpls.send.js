@@ -15,7 +15,7 @@ export const sendTemplatesDirectly = async(numbers, tmpl, time)=>{
         catch(error){
             console.log("Failed to send campaign message", error);
         }
-    },interval);
+    },generateRandomInterval(interval));
 }
 
 const sendFunction = async(num, msg)=>{
@@ -33,6 +33,12 @@ const sendFunction = async(num, msg)=>{
 export const generateRandomInterval = (time)=>{
     const fn = time * 60 * 1000;
     const sn = (time + 3) * 60 * 1000;
-    let random = Math.floor(Math.random() * (fn - sn)) + fn;
+    let random = Math.floor(Math.random() * (sn - fn)) + fn;
     return random;
+}
+
+
+export const getRandomTmpl = (t)=>{
+    const index = Math.floor(Math.random() * t.length);
+    return t[index];
 }
