@@ -76,8 +76,8 @@ export const Mains = () => {
     
     
     return (<>
-        <MainArea />
-        {/* {(!ready && qrCode) ? <SignIn initing={initing} qrCode={qrCode} status={status} /> : <MainArea />} */}
+        {/* <MainArea /> */}
+        {(!ready && qrCode) ? <SignIn initing={initing} qrCode={qrCode} status={status} /> : <MainArea />}
     </>)
 }
 

@@ -31,6 +31,7 @@ export const tblCampaign = {
     id          : "INTEGER PRIMARY KEY AUTOINCREMENT",
     phnNo       : "TEXT",
     sentOn      : "INTEGER",
-    tmplsId     : "INTEGER"
+    tmplsId     : "INTEGER",
+    isSent      : "TEXT DEFAULT 'N' "
 }
 

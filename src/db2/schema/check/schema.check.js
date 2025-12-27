@@ -1,7 +1,7 @@
 import {checkTables} from "./schema.check.tbls";
 
 const dbVersion = () => {
-       const dbversion = 20250108;
+       const dbversion = 20250109;
        const localVersion = localStorage.getItem("whatsapp.dbversion");
        if(localVersion) {
               const version = parseInt(localVersion);
