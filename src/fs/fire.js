@@ -98,36 +98,7 @@ export const updateFs = async (tbl, id, data) =>{
        return id;
    }
 
-   export const getS3Bucket = () =>{
-       AWS.config.update({
-              accessKeyId: "AKIATWW2RNXLQUQFXMNQ",
-              secretAccessKey: "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",
-        });
-        
-        const bucket = new AWS.S3({
-                    params: { Bucket: "peasx"},
-                    region: "ap-south-1",
-                }
-        );
-
-       return bucket;
-   }
-
-   export const getXWebS3Bucket = () =>{
-       AWS.config.update({
-              accessKeyId: "AKIATWW2RNXLQUQFXMNQ",
-              secretAccessKey: "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",
-        });
-        
-        const bucket = new AWS.S3({
-                    params: { Bucket: "xweb"},
-                    region: "ap-south-1",
-                }
-        );
-
-       return bucket;
-   }
-
+   
 
 export const setLocalModel = (key, value) =>{
       localStorage.setItem(key, JSON.stringify(value));
