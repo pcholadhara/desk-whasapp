@@ -73,11 +73,15 @@ export const Mains = () => {
         });
     }, [status]);
 
-    
-    
+
+    if ((!ready && !qrCode)) {
+        // return <SignIn initing={initing} qrCode={qrCode} status={status} />
+    }
+
+
     return (<>
-        {/* <MainArea /> */}
-        {(!ready && qrCode) ? <SignIn initing={initing} qrCode={qrCode} status={status} /> : <MainArea />}
+        <MainArea />
+        {/* {(!ready && qrCode) ? <SignIn initing={initing} qrCode={qrCode} status={status} /> : <MainArea />} */}
     </>)
 }
 
