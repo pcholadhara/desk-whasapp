@@ -1,5 +1,6 @@
 import { saveChat } from "../db2/chat/db.chat.save";
 import { getSoftUser } from "./localstore";
+
 const mdlChat = {
     id          : null,
     msgTo       : "",

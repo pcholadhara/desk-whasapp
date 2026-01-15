@@ -1,6 +1,8 @@
 import firebase from "firebase/compat/app";
 import 'firebase/compat/firestore';
-import AWS from 'aws-sdk'
+import { firebaseConfig } from "./conf";
+const app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+
 
 export const auth =()=>{return firebase.auth();}
 export const fsdb = ()=>{

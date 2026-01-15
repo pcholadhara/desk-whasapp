@@ -13,6 +13,7 @@ import TmplsList from "../../tmpls/TmplsList"
 import TmplsSend from "../../tmpls/TmplsSend"
 import TmplMaster from "../../tmpls/TmplMaster"
 import Send_Bulk from "../../send/Send_Bulk"
+import LeadLoader from "../../lead/LeadLoader"
 
 export const Mains = () => {
     const [initing, setIniting] = useState(true);
@@ -75,13 +76,13 @@ export const Mains = () => {
 
 
     if ((!ready && !qrCode)) {
-        // return <SignIn initing={initing} qrCode={qrCode} status={status} />
+        return <SignIn initing={initing} qrCode={qrCode} status={status} />
     }
 
 
     return (<>
-        <MainArea />
-        {/* {(!ready && qrCode) ? <SignIn initing={initing} qrCode={qrCode} status={status} /> : <MainArea />} */}
+        {/* <MainArea /> */}
+        {(!ready && qrCode) ? <SignIn initing={initing} qrCode={qrCode} status={status} /> : <MainArea />}
     </>)
 }
 
@@ -99,7 +100,7 @@ const Contents = () => {
     return (<>
         <div className="flex w-full flex-1 min-h-0 overflow-hidden">
             <Routes>
-                <Route exact path="/" element={<ChatHome />} />
+                <Route exact path="/" element={<LeadLoader />} />
                 <Route exact path="/Chat" element={<MSG_Home />} />
                 <Route exact path="/chat/:phnNo" element={<ChatWindow />} />
                 <Route exact path="/tmpls/:id/save" element={<TmplMaster />} />
