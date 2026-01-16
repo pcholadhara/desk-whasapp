@@ -66,16 +66,23 @@ const MessagePanel = ({ activities, lead, phoneNos, onAction }) => {
     }
 
     const SendMsg = async () => {
-        let number = `91${phoneNos[selectedNumbers]}`;
-        const sent = await new WASender()
-            .setReceipient(number, lead.leadName)
-            .setBody(messageText, "TEXT")
-            .send();
-        if(sent){
-            const upd = await saveLeadActivity(lead, phoneNos[selectedNumbers], messageText);
-            setButtonDis(true);
-        }
-        onAction();
+		try{
+			setButtonDis(true);
+			let number = `${phoneNos[selectedNumbers]}`;
+			const sent = await new WASender()
+				.setReceipient(number, lead.leadName)
+				.setBody(messageText, "TEXT")
+				.send();
+			if(sent){
+				const upd = await saveLeadActivity(lead, phoneNos[selectedNumbers], messageText);
+				setButtonDis(false);
+				onAction();
+				setMessageText("");
+			}
+		}catch(err){
+			console.log(err);
+			setButtonDis(false);
+		}		
     }
 
     const skip4Now = async () => {
@@ -121,7 +128,7 @@ const MessagePanel = ({ activities, lead, phoneNos, onAction }) => {
                         className="w-full border border-gray-300 rounded-md p-2 h-32 min-h-48 outline-none focus:border-gray-400 ring-0"
                         placeholder="Type your message here..." value={messageText} onChange={e => setMessageText(e.target.value)} >
                     </textarea>
-                    ,<button className="bg-teal-800 text-white px-4 py-2 rounded-md hover:bg-teal-900 cursor-pointer" disabled={buttonDis}>Send</button>
+                    ,<button className="bg-teal-800 text-white px-4 py-2 rounded-md hover:bg-teal-900 cursor-pointer" disabled={buttonDis} onClick={SendMsg}>Send</button>
                     ,<button className="bg-white text-orange-400 px-4 py-2 rounded-md cursor-pointer" disabled={buttonDis} onClick={e=>skip4Now()}>SKIP FOR NOW</button>
                 </div>
             </div>

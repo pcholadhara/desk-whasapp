@@ -9,9 +9,10 @@
     "dev": "vite",
     "electron": "wait-on tcp:5173 && electron .",
     "build": "vite build",
-    "rebuild": "electron-rebuild -f -w",
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dist": "electron-builder"
+    "dist": "npm run build && electron-builder",
+	"postinstall": "patch-package && electron-rebuild -f -w better-sqlite3"
   },
   "keywords": [],
   "author": "",
@@ -41,27 +42,34 @@
     "react-dom": "^19.2.0",
     "react-router": "^7.9.6",
     "react-router-dom": "^7.9.6",
-    "whatsapp-web.js": "^1.34.2",
+    "whatsapp-web.js": "^1.34.4",
     "xlsx": "^0.18.5"
   },
   "build": {
-  "appId": "px.desk.whatsapp",
-  "productName": "WhatsApp Desktop",
-  "directories": {
-    "output": "dist"
-  },
-  "win": {
-    "target": "nsis",
-    "icon": "build/icon.ico"
-  },
-  "mac": {
-    "target": "dmg",
-    "icon": "build/icon.icns"
-  },
-  "nsis": {
-    "oneClick": false,
-    "allowToChangeInstallationDirectory": true,
-    "createDesktopShortcut": true
+    "appId": "px.desk.whatsapp",
+    "productName": "WhatsApp Desktop",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "dist",
+      "main.js",
+      "xdesk",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "build/icon.icns"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+	  "differentialPackage": false
+    }
   }
-}
 }

@@ -40,10 +40,14 @@ class WASender{
     }
 
     async send(){
-        this.msg.dateTime = Date.now();
-        window.api.send('send-message', { number: this.msg.msgTo, message: this.msg.msgBody});
-        await saveChat(this.msg);  
-        return this.msg;
+		try{
+			this.msg.dateTime = Date.now();
+			window.api.send('send-message', { number: this.msg.msgTo, message: this.msg.msgBody});
+			await saveChat(this.msg);  
+			return this.msg;
+		}catch(err){
+			console.log(err);
+		}
     }
 }
 export default WASender;

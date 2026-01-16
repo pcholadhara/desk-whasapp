@@ -53,8 +53,8 @@ export const whatsApp = (ipcMain) => {
 
     ipcMain.on('send-message', async (event, { number, message }) => {
         try {
-            const sanitized_number = number.toString().replace(/[- )(]/g, ""); // remove unnecessary chars
-            const final_number = `91${sanitized_number.substring(sanitized_number.length - 10)}@c.us`; // add country code and suffix
+            const sanitized_number = number.toString().replace(/[- )(]/g, "");
+            const final_number = `91${sanitized_number.substring(sanitized_number.length - 10)}@c.us`;
 
             if (wclient && clientInitialized) {
                 await wclient.sendMessage(final_number, message);
@@ -90,14 +90,6 @@ export const whatsApp = (ipcMain) => {
         } catch (err) {
             console.error('IPC incoming-message error:', err);
         }
-
-        // if (browserWindow) {
-        //     browserWindow.webContents.send('incoming-message', {
-        //         from: msg.from,
-        //         body: msg.body,
-        //         timestamp: msg.timestamp
-        //     });
-        // }
     });
 };
 
